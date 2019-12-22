@@ -56,7 +56,7 @@
 <body>
 
     <div class="alert alert-secondary" role="alert">
-        欢迎使用文件上传系统
+        欢迎使用种子上传系统
     </div>
 
     <!-- 添加图片按钮 -->
@@ -138,6 +138,7 @@
                         console.log(res);
 
                         $('#exampleModal').modal();
+
                     }
                 },
 
@@ -183,7 +184,10 @@
             $('.progress').css('display', 'none');
 
             //影藏模态框
-            $('#exampleModal').modal('hide')
+            $('#exampleModal').modal('hide');
+
+            location.reload();   //为什么不能重复操作，必须要reload呢？
+
         })
      
 
