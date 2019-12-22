@@ -32,12 +32,12 @@
             display: none;
         }
 
-        img{
-           width: 80px;
-           height: 80px;
+        img {
+            width: 80px;
+            height: 80px;
         }
 
-        #add{
+        #add {
             font-size: 12px;
             margin-top: -5px;
         }
@@ -54,11 +54,10 @@
         欢迎使用文件上传系统
     </div>
 
-
+    <!-- 添加图片按钮 -->
     <form>
         <div class="form-group">
             <label for="exampleFormControlFile1">
-                
                 <img src="/node_modules/upload.png" alt="">
             </label>
             <p id="add">点击图标添加图片</p>
@@ -66,12 +65,33 @@
         </div>
     </form>
 
-
+    <!-- 进度条 -->
     <div class="progress">
         <div class="progress-bar progress-bar-striped " role="progressbar" aria-valuenow="75" aria-valuemin="0"
             aria-valuemax="100" style="width: 90%">10</div>
     </div>
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">提示</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    上传成功
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 
@@ -86,68 +106,78 @@
     $(function () {
 
 
-        $('#exampleFormControlFile1').on('change',function(){
+        $('#exampleFormControlFile1').on('change', function () {
 
             //得到文件
             // console.dir(this.files[0]);
 
-            let img =  this.files[0];
+            let img = this.files[0];
 
             let fd = new FormData();
 
-            fd.append('imgSend',img);
+            fd.append('imgSend', img);
 
-            console.log(fd.get('imgSend'))
+            // console.log(fd.get('imgSend'))
             //ajax post请求
             $.post({
-                url:'/addPic',
-                data:fd,
+                url: '/addPic',
+                data: fd,
 
-                processData:false,
-                contentType:false,
+                processData: false,
+                contentType: false,
 
-                success:function(res){
+                success: function (res) {
 
+                    if (res.code == 200) {
+
+                        console.log(res);
+
+                        setTimeout(() => {
+                            $('.progress').css('display', 'none');
+                        }, 8000);
+
+                        $('#exampleModal').modal();
+                    }
                 },
 
                 //要在jq里面给xhr注册事件，jq需要我们提供一个xhr对象
-                xhr: function(){
+                xhr: function () {
                     let xhr = new XMLHttpRequest();
 
                     // 给xhr注册process事件
-                    xhr.upload.onprogress = function(e){
-             
+                    xhr.upload.onprogress = function (e) {
+
                         let load = e.loaded;
                         let total = e.total;
-                        console.log(Math.floor((load/total)*100));
+                        // console.log(Math.floor((load/total)*100));
 
                         //得到进度
-                        let current = Math.floor((load/total)*100);
+                        let current = Math.floor((load / total) * 100);
 
                         //进度条完成
-                        $('.progress-bar-striped').css('width',`${current}%`);
+                        $('.progress-bar-striped').css('width', `${current}%`);
                         $('.progress-bar-striped').html(`${current}%`);
                     }
 
                     return xhr;
                 },
                 //事件
-                beforeSend:function(){
+                beforeSend: function () {
                     $('.progress-bar-striped').toggleClass('progress-bar-animated');
                     $('.progress').toggle('display', '');
                 }
 
-                
 
-                
+
+
             })
         })
 
-        //注册事件
-        // $('button').on('click', function () {
-        //     $('.progress-bar-striped').toggleClass('progress-bar-animated');
-        //     $('.progress').toggle('display', '');
-        // })
+
+        //给关闭注册一个事件
+        
+        
+     
 
 
     })
