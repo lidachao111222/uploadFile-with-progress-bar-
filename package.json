@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "formidable": "^1.2.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.0"
+  }
+}
