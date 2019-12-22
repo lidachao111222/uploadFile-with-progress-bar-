@@ -41,6 +41,11 @@
             font-size: 12px;
             margin-top: -5px;
         }
+
+
+        #exampleModal{
+            margin-top: 400px;
+        }
     </style>
 
 
@@ -132,10 +137,6 @@
 
                         console.log(res);
 
-                        setTimeout(() => {
-                            $('.progress').css('display', 'none');
-                        }, 8000);
-
                         $('#exampleModal').modal();
                     }
                 },
@@ -176,7 +177,14 @@
 
         //给关闭注册一个事件
         
-        
+        $('.btn-secondary').on('click',function(){
+
+            //影藏进度条
+            $('.progress').css('display', 'none');
+
+            //影藏模态框
+            $('#exampleModal').modal('hide')
+        })
      
 
 
