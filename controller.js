@@ -13,6 +13,10 @@ module.exports={
 
         form.uploadDir = "/Users/lichao/Desktop/uploadFile-with-progress-bar-/my/dir";  //为什么需要使用绝对路径？？？？？ 而不是上课的时候的相对路径
 
+        //设定上传最大值  2G
+        form.maxFileSize = 20000 * 1024 * 1024;
+
+        //改为不是二进制的，图片格式
         form.keepExtensions = true;
 
 
