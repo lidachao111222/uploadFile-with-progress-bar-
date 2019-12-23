@@ -32,7 +32,7 @@
             display: none;
         }
 
-        img {
+        #upload {
             width: 100px;
             height: 100px;
         }
@@ -45,6 +45,12 @@
 
         #exampleModal{
             margin-top: 300px;
+        }
+
+        .ban{
+            width: 20px;
+            height: 20px;
+            margin-top: -3px;
         }
     </style>
 
@@ -63,15 +69,15 @@
     <form>
         <div class="form-group">
             <label for="exampleFormControlFile1">
-                <img src="/node_modules/upload.png" alt="">
+                <img src="/node_modules/upload.png" id="upload" alt="">
             </label>
-            <p id="add">点击图标添加图片</p>
+            <p id="add">点击上方图标添加图片</p>
             <input type="file" class="form-control-file" id="exampleFormControlFile1">
         </div>
     </form>
 
 
-    <button type="button" class="btn btn-warning">点击进入浏览页(18🔥)</button>
+    <button type="button" class="btn btn-warning"><img src="/node_modules/fire.png" alt="" class="ban">点击进入浏览页(<img src="/node_modules/18.png" alt="" class="ban"><img src="/node_modules/026-禁止.png" alt="" class="ban">)</button>
 
     <!-- 进度条 -->
     <div class="progress">
