@@ -16,6 +16,9 @@ router.get('/',(req,res)=>{
     controller.uploadImg(req,res);
 }).get('/show',(req,res)=>{
     controller.showImg(req,res);
+}).get('/detail',(req,res)=>{
+    controller.showDetail(req,res);
+
 })
 
 

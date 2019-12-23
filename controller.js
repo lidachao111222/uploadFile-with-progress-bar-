@@ -78,6 +78,12 @@ module.exports = {
         });
 
 
+    },
+
+
+    //展示详情
+    showDetail(req,res){
+        res.render('detail.ejs',{} )
     }
 
 }
