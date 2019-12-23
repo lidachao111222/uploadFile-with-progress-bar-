@@ -29,12 +29,25 @@ module.exports = {
         })
     },
 
-
+    //得到所有数据
     getAlldata(callback){
         let sqlStr = 'select * from yellow';
         connection.query(sqlStr, (err,results)=>{
             if(err) return callback(err);
             callback(null,results);
         }) 
+    },
+
+
+    //得到图片细节
+    getDetail(id,callback){
+        //得到id
+        var id =id;
+        // console.log(id);
+        let sqlStr = 'select * from yellow where id=?';
+        connection.query(sqlStr,[id], function (err, results) {
+            if (err) callback( err);
+            callback(null,results);
+        });
     }
 }

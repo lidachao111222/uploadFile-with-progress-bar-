@@ -10,15 +10,16 @@ const bodypParser = require('body-parser');
 var router = express.Router()
 
 
-router.get('/',(req,res)=>{
-    controller.showIndex(req,res)
-}).post('/addPic',(req,res)=>{
-    controller.uploadImg(req,res);
-}).get('/show',(req,res)=>{
-    controller.showImg(req,res);
-}).get('/detail',(req,res)=>{
-    controller.showDetail(req,res);
-
+router.get('/', (req, res) => {
+    controller.showIndex(req, res)
+}).post('/addPic', (req, res) => {
+    controller.uploadImg(req, res);
+}).get('/show', (req, res) => {
+    controller.showImg(req, res);
+}).get('/detail', (req, res) => {
+    controller.showDetail(req, res);
+}).get('/getDetail', (req, res) => {
+    controller.getDetail(req, res);
 })
 
 

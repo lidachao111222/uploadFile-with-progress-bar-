@@ -1,13 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>页面详情</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        img {
+            width: 500px;
+            height: 500px;
+        }
+    </style>
 </head>
+
 <body>
-    
-    haha
+    <div class="jumbotron">
+        <h1 class="display-4">高清大图</h1>
+        <img src="" class="img-fluid" alt="Responsive image">
+        <hr class="my-4">
+        <a class="btn btn-primary btn-lg" href="#" role="button">返回上一页</a>
+    </div>
 </body>
+<script src="/node_modules/jquery/dist/jquery.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+
+<script>
+    $(function () {
+
+        let id = location.search.split('=')[1];
+        //发送ajax请求得到图片
+        $.get({
+            url:'/getDetail',
+            data:{
+                id:id
+            },
+            success:function(res){
+                if(res.code == 200){
+                    // console.log(res);
+                    let data = res.data[0].img;
+                    //得到图片路径
+                    console.log(data);
+                    //把值存入到
+                    $('img').attr('src',data);
+                }
+            }
+        })
+
+
+
+        //注册按钮点击事件返回
+        $('.btn-primary').on('click', function () {
+            history.back();
+        })
+    })
+</script>
+
 </html>

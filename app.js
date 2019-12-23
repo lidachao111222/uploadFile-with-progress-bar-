@@ -1,7 +1,7 @@
 //引入模块
 const express = require('express');
 const router = require('./router')
-
+const bodypParser = require('body-parser');
 //创建服务器
 const app = express();
 
@@ -19,6 +19,11 @@ app.use('/node_modules',express.static('node_modules'));
 app.use(express.static('views/img'));
 
 app.use('/my/dir/',express.static('my/dir'))
+
+app.use(bodypParser.urlencoded({
+    extended: false, 
+    limit:    2*1024*1024
+}))
 
 //注册请求事件
 app.use(router);

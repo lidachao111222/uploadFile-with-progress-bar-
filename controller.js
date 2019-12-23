@@ -1,5 +1,7 @@
 const Formidable = require('formidable');
 const dataManager = require('./dataManager')
+const path = require('path');
+const urlModel = require('url');
 
 
 
@@ -38,13 +40,13 @@ module.exports = {
             //得到的文件路径名字
             // console.log(files.imgSend.path);
 
-            
+
             //存到数据库里面  上面成功与否就不需要写了，直接数据库feedback
             dataManager.saveData(files.imgSend.path, (err, data) => {
                 if (err) return res.json({
                     code: 201,
                     message: '上传失败',
-                    data:err
+                    data: err
                 });
                 res.json({
                     code: 200,
@@ -74,7 +76,9 @@ module.exports = {
             console.log(data);
 
             //展示数据
-            res.render('show.ejs', {data:data})
+            res.render('show.ejs', {
+                data: data
+            })
         });
 
 
@@ -82,8 +86,26 @@ module.exports = {
 
 
     //展示详情
-    showDetail(req,res){
-        res.render('detail.ejs',{} )
+    showDetail(req, res) {
+        res.render('detail.ejs', {})
+    },
+
+    //传回json格式值
+    getDetail(req, res) {
+        let {id} = req.query;
+        // console.log(id)
+        dataManager.getDetail(id,(err,data)=>{
+            if(err) res.json({
+                code:201,
+                msg:'接收数据失败',
+                data:err
+            });
+            res.json({
+                code:200,
+                msg:'接收数据成功',
+                data:data
+            })
+        });
     }
 
 }
