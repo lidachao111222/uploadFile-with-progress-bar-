@@ -14,8 +14,9 @@ app.listen(3000,()=>{
 app.set('view engine','ejs');
 
 //设定静态文件托管
-app.use('/node_modules',express.static('node_modules'))
+app.use('/node_modules',express.static('node_modules'));
 
+app.use(express.static('views/img'));
 
 //注册请求事件
 app.use(router);
