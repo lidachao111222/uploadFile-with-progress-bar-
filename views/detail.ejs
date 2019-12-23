@@ -19,6 +19,7 @@
     <div class="jumbotron">
         <h1 class="display-4">高清大图</h1>
         <img src="" class="img-fluid" alt="Responsive image">
+        <video src="" width="500" height="500" controls="controls"></video>
         <hr class="my-4">
         <a class="btn btn-primary btn-lg" href="#" role="button">返回上一页</a>
     </div>
@@ -33,18 +34,32 @@
         let id = location.search.split('=')[1];
         //发送ajax请求得到图片
         $.get({
-            url:'/getDetail',
-            data:{
-                id:id
+            url: '/getDetail',
+            data: {
+                id: id
             },
-            success:function(res){
-                if(res.code == 200){
+            success: function (res) {
+                if (res.code == 200) {
                     // console.log(res);
                     let data = res.data[0].img;
                     //得到图片路径
-                    console.log(data);
-                    //把值存入到
-                    $('img').attr('src',data);
+
+                    if (data.split('.')[1] == 'mp4') {
+                        //把值存入到
+                        $('img').hide();
+                        $('video').attr('src', data);
+                        
+                        
+                    } else {
+
+                        //把值存入到
+                        $('img').attr('src', data);
+                        $('video').hide();
+                    }
+
+
+
+
                 }
             }
         })
@@ -55,6 +70,9 @@
         $('.btn-primary').on('click', function () {
             history.back();
         })
+
+
+
     })
 </script>
 

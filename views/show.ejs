@@ -13,15 +13,16 @@
             margin-left: 10px;
         }
 
-        .btn-primary{
-           margin-left: 70px;
+        .btn-primary {
+            margin-left: 70px;
         }
 
-        img{
+        img {
             width: 100px;
             height: 300px;
         }
-        .themed-grid-col{
+
+        .themed-grid-col {
             margin-top: 10px;
         }
     </style>
@@ -39,16 +40,21 @@
             <% for(var i = 0; i < data.length; i++){ %>
             <div class="col-4 themed-grid-col">
                 <div class="card" style="width: 18rem;">
-                    <img src="<%= data[i].img %>" class="card-img-top" alt="...">
+                    <% if (data[i].img.split('.')[1] == 'mp4') { %>
+                    <video src="<%= data[i].img %>" width="320" height="240" controls="controls"></video>
+                    <% } %>
+                    <% if (data[i].img.split('.')[1] != 'mp4') { %>
+                    <img src="<%= data[i].img %>" class="card-img-top">
+                    <% } %>
                     <div class="card-body">
                         <a href="/detail?id=<%= data[i].id %>" class="btn btn-primary">点击看大图</a>
                     </div>
                 </div>
             </div>
             <% } %>
-            
+
         </div>
-        
+
     </div>
 
 
