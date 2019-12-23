@@ -18,5 +18,7 @@ app.use('/node_modules',express.static('node_modules'));
 
 app.use(express.static('views/img'));
 
+app.use('/my/dir/',express.static('my/dir'))
+
 //注册请求事件
 app.use(router);

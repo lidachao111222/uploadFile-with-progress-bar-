@@ -72,9 +72,12 @@ module.exports = {
         dataManager.getAlldata((err, data) => {
             if (err) return console.log(err);
             console.log(data);
+
+            //展示数据
+            res.render('show.ejs', {data:data})
         });
 
-        res.render('show.ejs', {})
+
     }
 
 }

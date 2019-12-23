@@ -12,10 +12,10 @@ var router = express.Router()
 
 router.get('/',(req,res)=>{
     controller.showIndex(req,res)
-}).get('/show',(req,res)=>{
-    controller.showImg(req,res);
 }).post('/addPic',(req,res)=>{
     controller.uploadImg(req,res);
+}).get('/show',(req,res)=>{
+    controller.showImg(req,res);
 })
 
 
