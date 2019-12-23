@@ -5,12 +5,17 @@ const path = require('path');
 const urlModel = require('url');
 const bodypParser = require('body-parser');
 
+
 // 注册对象
 var router = express.Router()
 
 
 router.get('/',(req,res)=>{
-    res.render('index.ejs',{})
+    controller.showIndex(req,res)
+}).get('/show',(req,res)=>{
+    controller.showImg(req,res);
+}).post('/addPic',(req,res)=>{
+    controller.uploadImg(req,res);
 })
 
 

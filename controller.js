@@ -4,6 +4,7 @@ const Formidable = require('formidable');
 
 
 module.exports={
+    //上传
     uploadImg(req,res){
 
         // 创建一个接受文件对象
@@ -25,12 +26,33 @@ module.exports={
             if (err) res.json({
                 code:201,
                 message:'上传失败'
-            })
+            });
+
+            //得到的文件路径名字
+            console.log(files.imgSend.path);
+
+            //调用数据库，把图片路径存到数据库里面
+
             res.json({
                 code:200,
                 message:'上传成功',
                 data: files.imgSend.path
             })
           });
+    },
+
+
+    //展示首页
+    showIndex(req,res){
+        res.render('index.ejs',{})
+    },
+
+    //展示图片
+    showImg(req,res){
+
+        //展示图片
+
+        res.render('show.ejs',{})
     }
+
 }
