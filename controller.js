@@ -2,7 +2,7 @@ const Formidable = require('formidable');
 const dataManager = require('./dataManager')
 const path = require('path');
 const urlModel = require('url');
-
+const queryString = require('querystring');
 
 
 module.exports = {
@@ -63,7 +63,18 @@ module.exports = {
 
     //展示首页
     showIndex(req, res) {
-        res.render('index.ejs', {})
+
+
+        dataManager.getFeedback((results) =>{
+            if(results === 'err') return console.log(err);
+
+            // console.log(results);
+            res.render('index.ejs', {data:results})
+        });
+        
+
+
+     
     },
 
     //展示图片
@@ -73,7 +84,7 @@ module.exports = {
         //调用数据库，把图片路径存到数据库里面
         dataManager.getAlldata((err, data) => {
             if (err) return console.log(err);
-            console.log(data);
+            // console.log(data);
 
             //展示数据
             res.render('show.ejs', {
@@ -92,20 +103,64 @@ module.exports = {
 
     //传回json格式值
     getDetail(req, res) {
-        let {id} = req.query;
+        let {
+            id
+        } = req.query;
         // console.log(id)
-        dataManager.getDetail(id,(err,data)=>{
-            if(err) res.json({
-                code:201,
-                msg:'接收数据失败',
-                data:err
+        dataManager.getDetail(id, (err, data) => {
+            if (err) res.json({
+                code: 201,
+                msg: '接收数据失败',
+                data: err
             });
             res.json({
-                code:200,
-                msg:'接收数据成功',
-                data:data
+                code: 200,
+                msg: '接收数据成功',
+                data: data
             })
         });
+    },
+
+
+
+    //留下信息
+    leaveFeedback(req, res) {
+
+        let {
+            data
+        } = req.body;
+
+
+        //get ip 
+        var ip = req.headers['x-forwarded-for'] ||
+            req.ip ||
+            req.connection.remoteAddress ||
+            req.socket.remoteAddress ||
+            req.connection.socket.remoteAddress || '';
+        if (ip.split(',').length > 0) {
+            ip = ip.split(',')[0]
+        }
+ 
+
+        // console.log(data);
+        // console.log(ip);
+
+        ip = ip.substring(7);
+        
+        dataManager.saveFeedback(ip,data,(mes,ip,data)=>{
+            if(mes == true){
+                res.json({
+                    code: 201,
+                    mes:'上传失败'
+                })
+            }
+            res.json({
+                code: 200,
+                mes:'上传成功',
+                ip: ip,
+                data: data
+            })
+        })
     }
 
 }

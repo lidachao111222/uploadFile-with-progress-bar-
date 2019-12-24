@@ -20,6 +20,8 @@ router.get('/', (req, res) => {
     controller.showDetail(req, res);
 }).get('/getDetail', (req, res) => {
     controller.getDetail(req, res);
+}).post('/leaveFeedback',(req,res)=>{
+    controller.leaveFeedback(req,res);
 })
 
 
